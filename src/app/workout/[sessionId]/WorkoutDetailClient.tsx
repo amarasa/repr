@@ -385,7 +385,7 @@ export function WorkoutDetailClient() {
               🎉 Congratulations on {prCount} Personal Record{prCount > 1 ? 's' : ''}!
             </Typography>
             <Typography variant="body2">
-              You've achieved new personal bests. Keep up the great work!
+              You&apos;ve achieved new personal bests. Keep up the great work!
             </Typography>
           </Alert>
         )}
@@ -542,7 +542,7 @@ export function WorkoutDetailClient() {
                   )}
                   {stat.recommendedIncrease && (
                     <Typography variant="body2" color="info.main">
-                      💡 You've used {stat.exercise.weight} lbs for {stat.plateauWeeks} sessions. 
+                      💡 You&apos;ve used {stat.exercise.weight} lbs for {stat.plateauWeeks} sessions. 
                       Consider increasing to {stat.recommendedIncrease} lbs next time.
                     </Typography>
                   )}

@@ -244,8 +244,8 @@ export default function Dashboard() {
             </Alert>
           ) : isCompleted ? (
             <Alert severity="success" sx={{ mb: 2 }}>
-              <AlertTitle>🎉 {currentDay}'s Workout Completed!</AlertTitle>
-              Great job finishing today's workout. Check out your stats below.
+              <AlertTitle>🎉 {currentDay}&apos;s Workout Completed!</AlertTitle>
+              Great job finishing today&apos;s workout. Check out your stats below.
             </Alert>
           ) : null}
 
@@ -304,7 +304,7 @@ export default function Dashboard() {
                         <Calendar size={20} style={{ marginRight: 8 }} />
                       )}
                       <Typography variant="h6">
-                        {todayIsRestDay ? 'Rest Day' : `${currentDay}'s Workout`}
+                        {todayIsRestDay ? 'Rest Day' : `${currentDay}&apos;s Workout`}
                       </Typography>
                     </Box>
                     {todayIsRestDay ? (
