@@ -198,3 +198,31 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Built with ❤️ for the fitness community**
 
 *Repr - Represent Your Best Self*
+
+## 🚀 Deployment
+
+### Environment Variables
+
+For production deployment, you'll need to set up the following environment variables:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+```
+
+### Netlify Deployment
+
+1. **Set Environment Variables**: In your Netlify dashboard, go to Site Settings > Environment Variables and add:
+   - `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your Supabase anon/public key
+
+2. **Build Configuration**: The project includes a `netlify.toml` file with the correct build settings for static export.
+
+3. **Manual Deploy**: You can also deploy by running:
+   ```bash
+   npm run deploy
+   ```
+
+---
+
+## 🤝 Contributing

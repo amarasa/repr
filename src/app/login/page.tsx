@@ -15,6 +15,9 @@ import { Dumbbell } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = 'force-dynamic'
+
 /**
  * Repr Login Page
  * Handles email/password authentication via Supabase
