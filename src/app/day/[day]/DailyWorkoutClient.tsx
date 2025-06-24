@@ -16,7 +16,7 @@ import {
   Checkbox,
   Alert,
 } from '@mui/material'
-import { ArrowLeft, Check, Plus, Edit3, Calendar } from 'lucide-react'
+import { ArrowLeft, Check, Edit3, Calendar } from 'lucide-react'
 import { AppLayout } from '@/components/layout/AppLayout'
 import { getDayWorkout, saveWorkoutSession, Exercise } from '@/lib/mockData'
 
@@ -58,7 +58,7 @@ export function DailyWorkoutClient() {
   const [isCompleted, setIsCompleted] = useState(false)
   const [workoutNotes, setWorkoutNotes] = useState('')
   const [exercises, setExercises] = useState<Exercise[]>([])
-  const [dayProgram, setDayProgram] = useState<any>(null)
+  const [dayProgram, setDayProgram] = useState<{isRestDay: boolean, exercises: Exercise[]} | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export function DailyWorkoutClient() {
     setLoading(false)
   }, [dayName])
 
-  const updateExercise = (exerciseIndex: number, field: keyof Exercise, value: any) => {
+  const updateExercise = (exerciseIndex: number, field: keyof Exercise, value: string | number | boolean) => {
     setExercises(prev => prev.map((exercise, eIndex) => 
       eIndex === exerciseIndex
         ? { ...exercise, [field]: value }

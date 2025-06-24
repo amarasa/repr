@@ -15,7 +15,7 @@ import {
   Alert,
   Snackbar,
 } from '@mui/material'
-import { Plus, Calendar, Save, Copy, Trash2, ArrowLeft } from 'lucide-react'
+import { Calendar, Save, Trash2, ArrowLeft } from 'lucide-react'
 import { AppLayout } from '@/components/layout/AppLayout'
 import { ExerciseSelector } from '@/components/ExerciseSelector'
 import { ExerciseLibrary } from '@/lib/supabase'
@@ -122,7 +122,7 @@ export default function WeeklyProgramPage() {
     ))
   }
 
-  const updateExercise = (dayIndex: number, exerciseIndex: number, field: keyof Exercise, value: any) => {
+  const updateExercise = (dayIndex: number, exerciseIndex: number, field: keyof Exercise, value: string | number | boolean) => {
     setWeekProgram(prev => prev.map((day, dIndex) => 
       dIndex === dayIndex 
         ? {

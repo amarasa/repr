@@ -21,7 +21,6 @@ import {
   Home,
   Calendar,
   History,
-  Settings,
   Dumbbell,
   BarChart3,
 } from 'lucide-react'

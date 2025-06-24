@@ -14,18 +14,13 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
 } from '@mui/material'
 import { 
   CheckCircle, 
   Circle, 
   ChevronDown, 
   Code, 
-  Database, 
-  Shield, 
-  Smartphone,
   TrendingUp,
-  Users,
   Zap
 } from 'lucide-react'
 import { AppLayout } from '@/components/layout/AppLayout'
@@ -287,7 +282,7 @@ export default function StatusPage() {
                           <Chip 
                             label={task.priority} 
                             size="small" 
-                            color={getPriorityColor(task.priority) as any}
+                            color={getPriorityColor(task.priority) as 'error' | 'warning' | 'success' | 'default'}
                           />
                           <Chip 
                             label={task.estimate} 
@@ -328,7 +323,7 @@ export default function StatusPage() {
                           <Chip 
                             label={item.status} 
                             size="small" 
-                            color={getStatusColor(item.status) as any}
+                            color={getStatusColor(item.status) as 'success' | 'error' | 'warning' | 'info' | 'default'}
                           />
                         </Box>
                       }

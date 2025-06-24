@@ -193,7 +193,7 @@ export function WorkoutDetailClient() {
     setIsEditing(false)
   }
 
-  const updateEditedExercise = (exerciseIndex: number, field: keyof Exercise, value: any) => {
+  const updateEditedExercise = (exerciseIndex: number, field: keyof Exercise, value: string | number | boolean) => {
     setEditedExercises(prev => prev.map((exercise, eIndex) => 
       eIndex === exerciseIndex
         ? { ...exercise, [field]: value }

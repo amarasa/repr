@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { 
   Box, 
   Typography, 
-  Grid, 
   Card, 
   CardContent, 
   Button,
@@ -21,7 +20,9 @@ import {
   getTodaysWorkout, 
   getWeeklyStats, 
   getCurrentDayName,
-  getWorkoutHistory 
+  getWorkoutHistory,
+  Exercise,
+  WorkoutSession 
 } from '@/lib/mockData'
 
 /**
@@ -30,10 +31,10 @@ import {
  */
 export default function Dashboard() {
   const [hasProgram, setHasProgram] = useState<boolean | null>(null)
-  const [todaysWorkout, setTodaysWorkout] = useState<any>(null)
-  const [weeklyStats, setWeeklyStats] = useState<any>(null)
+  const [todaysWorkout, setTodaysWorkout] = useState<{isRestDay: boolean, exercises: Exercise[]} | null>(null)
+  const [weeklyStats, setWeeklyStats] = useState<{completedDays: number, totalWorkoutDays: number, restDays: number} | null>(null)
   const [currentDay, setCurrentDay] = useState('')
-  const [todaysCompletedWorkout, setTodaysCompletedWorkout] = useState<any>(null)
+  const [todaysCompletedWorkout, setTodaysCompletedWorkout] = useState<WorkoutSession | null>(null)
 
   useEffect(() => {
     // Check if user has set up their program
@@ -56,7 +57,7 @@ export default function Dashboard() {
         session.day_name.toLowerCase() === today &&
         session.completed
       )
-      setTodaysCompletedWorkout(completedToday)
+      setTodaysCompletedWorkout(completedToday || null)
     }
   }, [])
 
@@ -85,7 +86,7 @@ export default function Dashboard() {
               Represent Your Best Self
             </Typography>
             <Typography variant="body1" color="text.secondary" maxWidth={600} mx="auto">
-              Let's get you started by setting up your weekly workout program. 
+              Let&apos;s get you started by setting up your weekly workout program. 
               This will be your template for tracking daily workouts and progress.
             </Typography>
           </Box>
@@ -205,7 +206,7 @@ export default function Dashboard() {
   // Returning user dashboard
   const progressPercent = weeklyStats ? (weeklyStats.completedDays / weeklyStats.totalWorkoutDays) * 100 : 0
   const todayIsRestDay = todaysWorkout?.isRestDay
-  const todayHasExercises = todaysWorkout?.exercises?.length > 0
+  const todayHasExercises = (todaysWorkout?.exercises?.length || 0) > 0
   const isCompleted = !!todaysCompletedWorkout
 
   return (
@@ -333,7 +334,7 @@ export default function Dashboard() {
                             Exercises Completed
                           </Typography>
                           <Typography variant="body2" fontWeight={500}>
-                            {todaysCompletedWorkout.exercises.filter((ex: any) => ex.completed).length} / {todaysCompletedWorkout.exercises.length}
+                            {todaysCompletedWorkout?.exercises?.filter((ex: Exercise) => ex.completed).length} / {todaysCompletedWorkout?.exercises?.length}
                           </Typography>
                         </Box>
                         <Box display="flex" justifyContent="space-between" mb={1}>
@@ -341,7 +342,7 @@ export default function Dashboard() {
                             Total Weight Moved
                           </Typography>
                           <Typography variant="body2" fontWeight={500}>
-                            {todaysCompletedWorkout.exercises.reduce((total: number, ex: any) => 
+                            {todaysCompletedWorkout?.exercises?.reduce((total: number, ex: Exercise) => 
                               total + (ex.sets * ex.reps * ex.weight), 0
                             ).toLocaleString()} lbs
                           </Typography>
@@ -365,16 +366,16 @@ export default function Dashboard() {
                     ) : todayHasExercises ? (
                       <Box>
                         <Typography variant="subtitle2" gutterBottom>
-                          {todaysWorkout.exercises.length} exercises planned:
+                          {todaysWorkout?.exercises?.length || 0} exercises planned:
                         </Typography>
-                        {todaysWorkout.exercises.slice(0, 3).map((exercise: any, index: number) => (
+                        {todaysWorkout?.exercises?.slice(0, 3).map((exercise: Exercise, index: number) => (
                           <Typography key={index} variant="body2" color="text.secondary">
                             • {exercise.name} ({exercise.sets}×{exercise.reps})
                           </Typography>
                         ))}
-                        {todaysWorkout.exercises.length > 3 && (
+                        {(todaysWorkout?.exercises?.length || 0) > 3 && (
                           <Typography variant="body2" color="text.secondary">
-                            • +{todaysWorkout.exercises.length - 3} more exercises
+                            • +{(todaysWorkout?.exercises?.length || 0) - 3} more exercises
                           </Typography>
                         )}
                       </Box>
@@ -392,7 +393,7 @@ export default function Dashboard() {
                       startIcon={<Dumbbell size={16} />}
                       href={`/day/${getCurrentDayName()}`}
                     >
-                      Start {currentDay}'s Workout
+                      Start {currentDay}&apos;s Workout
                     </Button>
                   )}
                   
